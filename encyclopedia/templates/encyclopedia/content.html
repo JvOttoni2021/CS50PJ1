@@ -1,0 +1,15 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    
+    {% if page_body is None %}
+        <span class="default-error-message">Page {{ title }} Not found</span>
+    {% else %}
+        {{ page_body }}
+    {% endif %}
+
+{% endblock %}
