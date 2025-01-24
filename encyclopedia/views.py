@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django import forms
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -38,16 +38,47 @@ class NewPageForm(forms.Form):
     title = forms.CharField(label="Page Title",
         max_length=100,
         widget=forms.TextInput(attrs={
-            'placeholder': 'Enter the page title...',
+            'placeholder': 'Enter the page title...'
         }))
     page_content = forms.CharField(
         label="Page Content",
         widget=forms.Textarea(attrs={
-            'rows': 10,
+            'rows': 5,
             'cols': 80,
             'placeholder': 'Enter the content of the page here...'
         })
     )
+
+    def __init__(self, *args, title="", page_content="", **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].initial = title
+        self.fields['page_content'].initial = page_content
+        self.check_title(title=title)
+    
+    def check_title(self, title):
+        if title != "":
+            self.fields['title'].widget.attrs.update({
+                'hidden': 'hidden',
+            })
+
+            self.fields['title'].label = ''
+
+
+def edit(request, title):
+    if request.method == "POST":
+        form = NewPageForm(request.POST)
+        if form.is_valid():
+            form_title = form.cleaned_data["title"]
+            page_content = form.cleaned_data["page_content"]
+            util.save_entry(form_title, page_content)
+            return redirect(reverse("shows_content", args=[form_title]))
+
+
+    return render(request, "encyclopedia/edit.html", {
+        "form": NewPageForm(title=title, page_content=util.get_entry(title)),
+        "result_message": "",
+        "title": title
+    })
 
 
 def add(request):
