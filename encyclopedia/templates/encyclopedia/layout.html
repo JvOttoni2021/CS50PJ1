@@ -15,16 +15,17 @@
                 <form action="{% url 'index' %}" method="POST">
                     {% csrf_token %}
                     <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
-                    <div>
-                        <a href="{% url 'index' %}">Home</a>
-                    </div>
-                    <div>
-                        <input type="submit" text="Create New Page"></input>
-                    </div>
-                    <div>
-                        Random Page
-                    </div>
+                    <input type="submit" value="Search"></input>
                 </form>
+                <div>
+                    <a href="{% url 'index' %}">Home</a>
+                </div>
+                <div>
+                    <a href="{% url 'add' %}">Create New Page</a>
+                </div>
+                <div>
+                    Random Page
+                </div>
                 {% block nav %}
                 {% endblock %}
             </div>
