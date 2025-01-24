@@ -96,7 +96,7 @@ def add(request):
                 page_content = form.cleaned_data["page_content"]
 
                 util.save_entry(title, page_content)
-                return shows_content(request, title)
+                return redirect(reverse("shows_content", args=[title]))
             else:
                 result_message = f"Page \"{title}\" already exists!"
 
