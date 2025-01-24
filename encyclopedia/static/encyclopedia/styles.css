@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: white;
+    overflow: hidden;
 }
 
 code {
@@ -13,8 +14,9 @@ h1 {
 }
 
 textarea {
-    height: 90vh;
+    height: 70vh;
     width: 80%;
+    resize: none;
 }
 
 .main {
@@ -39,4 +41,28 @@ textarea {
 
 .default-error-message {
     color: red;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 10px;
+}
+
+#id_title {
+    width: 80%;
+}
+
+.default-submit {
+    width: fit-content;
+    padding: 5px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.default-submit:hover {
+    background-color: #e5e5e5;
 }
