@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from . import util
 from random import randrange
-import random
+import markdown2
 
 
 def index(request):
@@ -31,7 +31,7 @@ def index(request):
 
 def shows_content(request, page_title):
     return render(request, "encyclopedia/content.html", {
-        "page_body": util.get_entry(page_title),
+        "page_body": markdown2.markdown(util.get_entry(page_title)),
         "title": page_title.capitalize()
     })
 

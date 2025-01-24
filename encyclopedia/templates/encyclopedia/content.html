@@ -9,8 +9,8 @@
     {% if page_body is None %}
         <span class="default-error-message">Page {{ title }} Not found</span>
     {% else %}
+        {{ page_body|safe }}
         <a href="./edit/{{ title }}">Edit</a>
-        {{ page_body }}
     {% endif %}
 
 {% endblock %}
