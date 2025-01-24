@@ -3,6 +3,8 @@ from django import forms
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from . import util
+from random import randrange
+import random
 
 
 def index(request):
@@ -107,3 +109,10 @@ def add(request):
         "form": NewPageForm(),
         "result_message": ""
     })
+
+def random(request):
+    list = util.list_entries()
+
+    random_entry = list[randrange(0, len(list) - 1)]
+
+    return shows_content(request, random_entry)
