@@ -30,8 +30,12 @@ def index(request):
 
 
 def shows_content(request, page_title):
+    body = util.get_entry(page_title)
+    if body is not None:
+        body = markdown2.markdown(util.get_entry(page_title))
+        
     return render(request, "encyclopedia/content.html", {
-        "page_body": markdown2.markdown(util.get_entry(page_title)),
+        "page_body": body,
         "title": page_title.capitalize()
     })
 

@@ -10,6 +10,7 @@
         {% csrf_token %}
         {{ form }}
         <input class="default-submit" type="submit" value="Save">
+        <span class="default-error-message">{{ result_message }}</span>
     </form>
 
 {% endblock %}
